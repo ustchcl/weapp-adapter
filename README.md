@@ -29,6 +29,9 @@ weapp-adapter of Wechat Tiny Game in ES6
 * 添加 符合Web习惯的Worker, 但只适用与主线程
 * 离屏canvas不支持WebGL模式 (支持的非常糟糕, 相当于不支持)
 
+## For Babylon.js [ustchcl@gmail.com]
+- [x] 使用Blob.js 支持加载纹理 
+
 
 ----
 

@@ -1,5 +1,6 @@
 import * as _window from './window'
 import document from './document'
+import "./Blob"
 
 const global = GameGlobal
 
