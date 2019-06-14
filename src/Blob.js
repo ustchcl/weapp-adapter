@@ -8,10 +8,12 @@
  *   See https://github.com/eligrey/Blob.js/blob/master/LICENSE.md
  */
 
-;(function () {
-  var global = typeof window === 'object'
-      ? window : typeof self === 'object'
-      ? self : this
+export default function insertBlob (global) {
+    if (!global) {
+        global = typeof window === 'object'
+            ? window : typeof self === 'object'
+            ? self : this
+    }
 
   var BlobBuilder = global.BlobBuilder
     || global.WebKitBlobBuilder
@@ -499,10 +501,9 @@
         }
       }
     }
-
-    global['FileReader'] = FileReader
-    global['File'] = File
-    global['Blob'] = Blob
+    !global.FileReader && (global['FileReader'] = FileReader);
+    !global.File && (global['File'] = File);
+    !global.Blob && (global['Blob'] = Blob);
   }
 
   function fixFileAndXHR () {
@@ -563,7 +564,7 @@
       }
     }
   }
-
+  console.log(blobSupported, blobBuilderSupported);
   if (blobSupported) {
     fixFileAndXHR()
     global.Blob = blobSupportsArrayBufferView ? global.Blob : BlobConstructor
@@ -682,4 +683,4 @@
   if (!blob.stream) {
     blob.stream = stream
   }
-})()
+}

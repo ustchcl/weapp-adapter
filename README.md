@@ -13,6 +13,10 @@ weapp-adapter of Wechat Tiny Game in ES6
 
 **注意** : 本项目已经放弃对 Phaser 的支持, 因为最新的 Phaser 大量使用 Blob 对象, 而在微信小游戏里目前无法模拟 Blob. 欲使用 Phaser 的朋友请自行修改 Phaser 的代码, 避免使用 Blob 对象.
 
+> Note by ustchcl@gmail.com: 
+> 载入Blob对象，在微信中已经能把Babylon的纹理加载进来，实验成功。
+
+
 ----
 
 ## 改良内容
@@ -32,6 +36,19 @@ weapp-adapter of Wechat Tiny Game in ES6
 ## For Babylon.js [ustchcl@gmail.com]
 - [x] 使用Blob.js 支持加载纹理 
 
+```javascript
+// the bad part
+// 1. 临时方案 在Babylon.js中注释掉
+//    微信环境中此属性为只读，不可设置，具体影响未知
+/*this._gl.HALF_FLOAT_OES=36193,*/
+
+// 2. 删除掉this.renderingCanvas.setAttribute('touch-action', 'none')
+//    微信环境中canvas上没有setAttribute这个方法
+//    开发工具中，使用开放域之后也可以复现此情况
+
+// 删除后
+_disableTouchAction=function(){this._renderingCanvas&&(this._renderingCanvas.style.touchAction="none",
+```
 
 ----
 

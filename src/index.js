@@ -1,12 +1,13 @@
 import * as _window from './window'
 import document from './document'
-import "./Blob"
-
+import insertBlob from "./Blob"
 const global = GameGlobal
-
 GameGlobal.global = GameGlobal.global || global
 
+
+
 function inject() {
+  console.debug('inject');
     _window.document = document;
 
     _window.addEventListener = (type, listener) => {
@@ -58,4 +59,6 @@ function inject() {
 if (!GameGlobal.__isAdapterInjected) {
     GameGlobal.__isAdapterInjected = true
     inject()
+
+    insertBlob(GameGlobal);
 }
